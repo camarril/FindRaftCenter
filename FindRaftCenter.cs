@@ -8,7 +8,7 @@ using System;
 [ModIconUrl("https://raw.githubusercontent.com/camarril/FindRaftCenter/master/Thumbnail.png")]
 [ModWallpaperUrl("https://raw.githubusercontent.com/camarril/FindRaftCenter/master/Banner.jpg")]
 [ModVersionCheckUrl("https://raftmodding.com/api/v1/mods/findraftcenter/version.txt")]
-[ModVersion("1.1")]
+[ModVersion("v1.2")]
 [RaftVersion("Update 10.06 (4473383)")]
 [ModIsPermanent(false)]
 public class FindRaftCenter : Mod
