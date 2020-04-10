@@ -8,8 +8,8 @@ using System;
 [ModIconUrl("https://raw.githubusercontent.com/camarril/FindRaftCenter/master/Thumbnail.png")]
 [ModWallpaperUrl("https://raw.githubusercontent.com/camarril/FindRaftCenter/master/Banner.jpg")]
 [ModVersionCheckUrl("https://raftmodding.com/api/v1/mods/findraftcenter/version.txt")]
-[ModVersion("v1.3")]
-[RaftVersion("Update 10.06 (4473383)")]
+[ModVersion("v1.5")]
+[RaftVersion("Update 11 (4677160)")]
 [ModIsPermanent(false)]
 public class FindRaftCenter : Mod
 {
@@ -20,23 +20,15 @@ public class FindRaftCenter : Mod
     {
         AssetBundleCreateRequest request = AssetBundle.LoadFromMemoryAsync(Convert.FromBase64String(embeddedAssetBundle.data));
         yield return request;
-        assets = request.assetBundle;
-        RConsole.Log("FindRaftCenter has been loaded!");
-    }
 
-    public void Update()
-    {
+        assets = request.assetBundle;
+        GameObject cylinderAsset = assets.LoadAsset<GameObject>("Cylinder");
+        marker = Instantiate(cylinderAsset);
+        marker.transform.localScale = new Vector3(0.3f, 4f, 0.3f);
+
         Raft raft = ComponentManager<Raft>.Value;
-        if (raft)
-        {
-            if (!marker)
-            {
-                GameObject cylinderAsset = assets.LoadAsset<GameObject>("Cylinder");
-                marker = Instantiate(cylinderAsset);
-            }
-            Transform transform = raft.gameObject.transform;
-            marker.transform.position = transform.position;
-        }
+        marker.transform.SetParent(raft.gameObject.transform, false);
+        RConsole.Log("FindRaftCenter has been loaded!");
     }
 
     public void OnModUnload()
